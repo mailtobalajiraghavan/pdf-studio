@@ -68,7 +68,7 @@ pdf-splitter/
 
 ## Notes
 
-- Maximum file size: 50MB
+- No file size or page count limits — split as much as your machine can handle
 - Only PDF files are accepted
 - Files are stored temporarily and may be cleaned up periodically
 
