@@ -2,6 +2,8 @@
 
 A simple web application to split PDF files into individual pages.
 
+🔗 **Live demo:** [madebybalaji.com/pdfsnip](https://madebybalaji.com/pdfsnip/)
+
 ## Features
 
 - 📤 **Drag & Drop Upload** - Simply drag and drop your PDF file
