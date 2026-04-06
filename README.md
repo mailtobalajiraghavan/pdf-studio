@@ -17,7 +17,9 @@ A free, open-source, **100% client-side** PDF toolkit. Eight PDF tools that run 
 
 ## 🛡️ Privacy by design
 
-This is a **single static HTML file**. There is no server, no upload, no telemetry, no tracking, no analytics. Every PDF you process is handled locally by JavaScript running in your own browser tab. Close the tab and it's gone.
+This is a **single static HTML file**. There is no server upload — every PDF you process is handled locally by JavaScript running in your own browser tab. Close the tab and it's gone.
+
+The hosted demo at [madebybalaji.com/pdfsnip](https://madebybalaji.com/pdfsnip/) uses [GoatCounter](https://www.goatcounter.com/) for **anonymous, cookie-less page-view counts** (no personal data, no fingerprinting, no third-party trackers). If you self-host, simply remove the GoatCounter `<script>` tag at the bottom of `index.html` to disable it entirely.
 
 ## 🚀 Run it
 

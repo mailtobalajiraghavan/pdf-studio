@@ -35,9 +35,15 @@
   "browserRequirements": "Requires a modern browser with JavaScript enabled"
 }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"
+        integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"
+        integrity="sha384-weMABwrltA6jWR8DDe9Jp5blk+tZQh7ugpCsF3JwSA53WZM9/14PjS5LAJNHNjAI"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+        integrity="sha384-+mbV2IY1Zk/X1p/nWllGySJSUN8uMs+gUAN10Or95UBH0fpj6GfKgPmgC5EXieXG"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
 /* ── THEME VARIABLES — Apple / Nothing minimal ─────────────────── */
 :root {
@@ -837,7 +843,7 @@ footer strong{color:var(--text-m)}
         <div class="bt-icon ic-prot">🔒</div>
         <div class="bt-body">
           <div class="bt-name">Protect</div>
-          <div class="bt-desc">Password-encrypt PDFs with AES-128 in one click.</div>
+          <div class="bt-desc">Password-encrypt PDFs with AES-256 in one click.</div>
           <div class="bt-arrow">Open →</div>
         </div>
       </div>
@@ -1422,18 +1428,24 @@ function dzDrop(e,id){
 }
 
 // ── Download helper ──────────────────────────────────────────────────
+function safeName(name){
+  // Strip path separators, control chars, and Windows-reserved names
+  let n=String(name||'download.pdf').replace(/[\\/:*?"<>|\x00-\x1f]/g,'_').replace(/^\.+/,'_').slice(0,200);
+  if(/^(con|prn|aux|nul|com[1-9]|lpt[1-9])(\..*)?$/i.test(n))n='_'+n;
+  return n||'download.pdf';
+}
 function downloadBytes(bytes,name){
   const blob=new Blob([bytes],{type:'application/pdf'});
   const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');a.href=url;a.download=name;a.click();
+  const a=document.createElement('a');a.href=url;a.download=safeName(name);a.click();
   setTimeout(()=>URL.revokeObjectURL(url),10000);
 }
 async function downloadZip(files,zipName){
   const zip=new JSZip();
-  files.forEach(f=>zip.file(f.name,f.bytes));
+  files.forEach(f=>zip.file(safeName(f.name),f.bytes));
   const blob=await zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:6}});
   const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');a.href=url;a.download=zipName;a.click();
+  const a=document.createElement('a');a.href=url;a.download=safeName(zipName);a.click();
   setTimeout(()=>URL.revokeObjectURL(url),15000);
 }
 
@@ -2095,6 +2107,8 @@ async function startProtect(){
     G('pf-protect').style.width='100%';
     const baseName=S.protectFile.name.replace(/\.pdf$/i,'');
     downloadBytes(bytes,baseName+'-protected.pdf');
+    // Clear password fields from DOM after use
+    G('prot-pass').value='';G('prot-pass2').value='';
     toast('PDF protected — downloading','s');
   }catch(err){toast('Protection failed: '+err.message,'e');}
   finally{setAllBusy(false);}
@@ -2124,6 +2138,7 @@ async function startUnlock(){
     G('pf-unlock').style.width='100%';
     const baseName=S.unlockFile.name.replace(/\.pdf$/i,'');
     downloadBytes(bytes,baseName+'-unlocked.pdf');
+    G('unlock-pass').value='';
     toast('PDF unlocked — downloading','s');
   }catch(err){
     const msg=err.message||'';
