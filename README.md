@@ -69,3 +69,30 @@ pdf-splitter/
 - Maximum file size: 50MB
 - Only PDF files are accepted
 - Files are stored temporarily and may be cleaned up periodically
+
+## Contributing
+
+Contributions are welcome! Here's how to get involved:
+
+1. **Fork** the repository.
+2. **Create a branch** for your change: `git checkout -b feature/my-change`
+3. **Install dependencies** and make sure the app runs locally:
+   ```bash
+   pip install -r requirements.txt
+   python app.py
+   ```
+4. **Make your changes.** Please keep them focused — one feature or fix per PR.
+5. **Test** your changes by uploading and splitting a few PDFs.
+6. **Commit** with a clear message: `git commit -m "Add: short description"`
+7. **Push** and open a **Pull Request** describing what you changed and why.
+
+### Guidelines
+
+- Follow PEP 8 for Python code style.
+- Keep dependencies minimal — discuss in an issue before adding new ones.
+- For larger changes or new features, please open an issue first to discuss.
+- Report bugs via the issue tracker with steps to reproduce.
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
