@@ -1,100 +1,75 @@
-# PDF Splitter
+# PDFsnip
 
-A simple web application to split PDF files into individual pages.
+A free, open-source, **100% client-side** PDF toolkit. Eight PDF tools that run entirely in your browser — your files never leave your device.
 
 🔗 **Live demo:** [madebybalaji.com/pdfsnip](https://madebybalaji.com/pdfsnip/)
 
-## Features
+## ✨ Features
 
-- 📤 **Drag & Drop Upload** - Simply drag and drop your PDF file
-- ⚡ **Fast Processing** - Split PDFs in seconds
-- 📦 **Batch Download** - Download all pages as a ZIP file
-- 📄 **Individual Downloads** - Download specific pages separately
-- 🔒 **Secure** - Files are processed locally on your machine
-- 📱 **Responsive Design** - Works on desktop and mobile
+- ✂️ **Split PDF** — Extract any pages, reorder, rotate, or delete visually before downloading
+- 🔗 **Merge PDFs** — Combine multiple PDFs into one, drag to reorder
+- 🗜️ **Compress PDF** — Shrink PDFs by up to 80% with three quality levels
+- 🖼️ **PDF → Images** — Export every page as PNG or JPEG up to 216 DPI
+- 🔏 **Watermark** — Stamp text on every page with custom opacity, position, and color
+- 🔢 **Page Numbers** — Add configurable page numbers in any position and format
+- 🔒 **Password Protect** — AES-128 encrypt your PDFs in one click
+- 🔓 **Unlock PDF** — Remove the password from any PDF you own
 
-## Installation
+## 🛡️ Privacy by design
 
-1. Navigate to the app directory:
+This is a **single static HTML file**. There is no server, no upload, no telemetry, no tracking, no analytics. Every PDF you process is handled locally by JavaScript running in your own browser tab. Close the tab and it's gone.
+
+## 🚀 Run it
+
+### Option 1 — Open the file
+Just open `index.html` in any modern browser. That's it.
+
+### Option 2 — Local server (optional)
 ```bash
-cd playground/pdf-splitter
+python -m http.server 8000
+# then open http://localhost:8000
 ```
 
-2. Install the required dependencies:
-```bash
-pip install -r requirements.txt
-```
+### Option 3 — Deploy
+Drop the folder onto any static host:
+- [Netlify](https://app.netlify.com/drop) — drag and drop, done
+- [Cloudflare Pages](https://pages.cloudflare.com/) — connect this repo
+- [GitHub Pages](https://pages.github.com/) — enable in repo settings
+- Vercel, Surge, S3, or your own nginx — anything that serves static files
 
-## Usage
+A `netlify.toml` is included with sensible security headers (CSP, X-Frame-Options, nosniff, Referrer-Policy).
 
-1. Start the Flask server:
-```bash
-python app.py
-```
+## 🛠️ Tech stack
 
-2. Open your browser and navigate to:
-```
-http://localhost:5000
-```
+- **HTML / CSS / Vanilla JS** — no framework, no build step
+- **[pdf-lib](https://pdf-lib.js.org/)** — PDF reading, writing, and manipulation
+- **[JSZip](https://stuk.github.io/jszip/)** — building ZIP downloads
+- **[download.js](http://danml.com/download.html)** — triggering file downloads
 
-3. Upload your PDF file by:
-   - Dragging and dropping into the upload area
-   - Or clicking to browse and select a file
+That's the entire stack. No npm, no bundler, no node_modules.
 
-4. Click "Split PDF" to process the file
-
-5. Download options:
-   - **Download All Pages (ZIP)** - Get all pages in a single ZIP file
-   - **Individual Pages** - Click "Download" on any specific page
-
-## Requirements
-
-- Python 3.7+
-- Flask
-- pypdf
-
-## File Structure
+## 📁 Project structure
 
 ```
 pdf-splitter/
-├── app.py              # Flask application
-├── requirements.txt    # Python dependencies
-├── README.md          # This file
-├── templates/
-│   └── index.html     # Web interface
-├── uploads/           # Temporary upload directory
-└── output/            # Split PDF output directory
+├── index.html       # The entire app
+├── netlify.toml     # Static hosting config + security headers
+├── tests.md         # Manual test plan
+├── README.md
+├── CONTRIBUTING.md
+└── LICENSE
 ```
 
-## Notes
+## 🤝 Contributing
 
-- No file size or page count limits — split as much as your machine can handle
-- Only PDF files are accepted
-- Files are stored temporarily and may be cleaned up periodically
+Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide.
 
-## Contributing
+Quick version:
+1. Fork and branch from `master`
+2. Edit `index.html` directly
+3. Test by opening it in a browser
+4. Open a PR with a clear description
 
-Contributions are welcome! Here's how to get involved:
+## 📜 License
 
-1. **Fork** the repository.
-2. **Create a branch** for your change: `git checkout -b feature/my-change`
-3. **Install dependencies** and make sure the app runs locally:
-   ```bash
-   pip install -r requirements.txt
-   python app.py
-   ```
-4. **Make your changes.** Please keep them focused — one feature or fix per PR.
-5. **Test** your changes by uploading and splitting a few PDFs.
-6. **Commit** with a clear message: `git commit -m "Add: short description"`
-7. **Push** and open a **Pull Request** describing what you changed and why.
-
-### Guidelines
-
-- Follow PEP 8 for Python code style.
-- Keep dependencies minimal — discuss in an issue before adding new ones.
-- For larger changes or new features, please open an issue first to discuss.
-- Report bugs via the issue tracker with steps to reproduce.
-
-## License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+MIT — see [LICENSE](LICENSE). Use it, fork it, host it, do whatever.

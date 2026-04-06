@@ -1,20 +1,11 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-.venv/
-venv/
-
-# App runtime data
-uploads/
-output/
-
 # Editor / tooling
 .claude/
 .vscode/
 .idea/
 
-# Env
-.env
-.env.*
-!.env.example
+# Netlify CLI state
+.netlify/
+
+# OS
+.DS_Store
+Thumbs.db
